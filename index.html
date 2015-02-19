@@ -8,11 +8,44 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        var s1 = 0;
+        var s2 = 0;
+        var s3 = 0;
+
+        $(document).on("pageinit", "#calificacionAlumno", function() {
+            $("#slider-1").on('slidestop', function(event) {
+                s1 = $("#slider-1").val() * 0.65; // 65% de la nota, max 6.5 puntos
+                var total = s1 + s2 + s3;
+                $("#text-10").val(total);
+            });
+
+            $("#slider-2").on('slidestop', function(event) {
+                s2 = $("#slider-2").val() * 0.10; // 10% de la nota, max 1 punto
+                var total = s1 + s2 + s3;
+                $("#text-10").val(total);
+            });
+
+            $("#slider-3").on('slidestop', function(event) {
+                s3 = $("#slider-3").val() * 0.25; // 25% de la nota, max 2.5 puntos
+                var total = s1 + s2 + s3;
+                $("#text-10").val(total);
+            });
+        });
+
+        var total = s1 + s2 + s3;
+        $("#text-10").val(total);
+
+
+    });
+    </script>
 </head>
 
 <body>
 
-    <!-- Start of first page -->
+    <!-- PRIMERA PAGINA - PROFESOR -->
     <div data-role="page" id="seleccionProfesor">
 
         <div data-role="header">
@@ -55,12 +88,13 @@
     </div>
     <!-- /page -->
 
-    <!-- Start of second page -->
+    <!-- SEGUNDA PAGINA - ALUMNO -->
     <div data-role="page" id="seleccionAlumno">
 
         <div data-role="header">
+        <a href="#seleccionProfesor" class="ui-btn ui-icon-back ui-btn-icon-left">Atrás</a>
             <h1>Alumno</h1>
-            <button class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Siguiente</button>
+            <a href="#exposicionAlumno" class="ui-btn ui-btn-right ui-corner-all ui-btn-inline ui-mini footer-button-right ui-btn-icon-right ui-icon-carat-r">Siguiente</a>
         </div>
         <!-- /header -->
 
@@ -109,12 +143,13 @@
     <!-- /page -->
 
 
-    <!-- Comienzo de la tercera pagina -->
-    <div data-role="page" id="seleccionAlumno">
+    <!-- TERCERA PAGINA - EXPOSICION ALUMNO -->
+    <div data-role="page" id="exposicionAlumno">
 
         <div data-role="header">
+        <a href="#seleccionAlumno" class="ui-btn ui-icon-back ui-btn-icon-left">Atrás</a>
             <h1>Puntuación</h1>
-            <button class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Siguiente</button>
+            <a href="#calificacionAlumno" class="ui-btn ui-btn-right ui-corner-all ui-btn-inline ui-mini footer-button-right ui-btn-icon-right ui-icon-carat-r">Siguiente</a>
         </div>
 
 
@@ -134,7 +169,7 @@
             </div>
             <div class="ui-field-contain">
 
-                <label for="select-native-17">Indumentaria:</label>
+                <label for="select-native-17">Indumentaria: </label>
 
                 <select name="select-native-17" id="select-native-17">
                     <option value="1">Incorrecta</option>
@@ -368,7 +403,7 @@
                     <option value="2" selected="selected">Correcta</option>
                 </select>
 
-                 <label for="select-native-17">Tics, gestos nerviosos:</label>
+                <label for="select-native-17">Tics, gestos nerviosos:</label>
 
                 <select name="select-native-17" id="select-native-17">
                     <option value="1">Muchos tics/gestos nerviosos</option>
@@ -379,7 +414,7 @@
             </div>
             <!-- FIN DE DESPLEGABLE -->
 
-<div class="ui-field-contain">
+            <div class="ui-field-contain">
 
                 <label for="select-native-17">Capta la atención del público:</label>
 
@@ -411,6 +446,57 @@
 
         </div>
         <!-- FIN DE CONTENIDO -->
+
+        <div data-role="footer">
+            <h4>jQuery Mobile - Miguel Berges</h4>
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page -->
+
+    <!-- CUARTA PAGINA - CALIFICACION ALUMNO -->
+    <div data-role="page" id="calificacionAlumno">
+
+        <div data-role="header">
+        <a href="#exposicionAlumno" class="ui-btn ui-icon-back ui-btn-icon-left">Atrás</a>
+            <h1>Calificación</h1>
+            <a href="#seleccionProfesor" class="ui-btn ui-btn-right ui-corner-all ui-btn-inline ui-mini footer-button-right ui-btn-icon-right ui-icon-carat-r">FINALIZAR</a>
+
+        </div>
+        <!-- /header -->
+
+        <div role="main" class="ui-content" id="pruebaa">
+            <h2>Califica cada parte de la presentacion para obtener la nota final.</h2>
+
+            <div class="ui-field-contain">
+                <label for="slider-3">Contenido del proyecto:</label>
+
+                <input type="range" name="slider-3" id="slider-1" min="0" max="10" value="5" data-show-value="true" data-popup-enabled="true" data-highlight="true">
+            </div>
+
+            <div class="ui-field-contain">
+                <label for="slider-3">Calidad de presentación:</label>
+
+                <input type="range" name="slider-3" id="slider-2" min="0" max="10" value="5" data-show-value="true" data-popup-enabled="true" data-highlight="true">
+            </div>
+
+            <div class="ui-field-contain">
+                <label for="slider-3">Expresión oral:</label>
+
+                <input type="range" name="slider-3" id="slider-3" min="0" max="10" value="5" data-show-value="true" data-popup-enabled="true" data-highlight="true">
+            </div>
+
+
+            <div class="ui-field-contain">
+                <label for="text-10">NOTA FINAL:</label>
+
+                <input type="text" disabled="disabled" name="text-10" id="text-10" value="">
+
+            </div>
+
+
+        </div>
+        <!-- /content -->
 
         <div data-role="footer">
             <h4>jQuery Mobile - Miguel Berges</h4>
