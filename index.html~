@@ -10,6 +10,7 @@
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
+
         var s1 = 0;
         var s2 = 0;
         var s3 = 0;
@@ -36,6 +37,8 @@
 
         var total = s1 + s2 + s3;
         $("#text-10").val(total);
+
+
     });
     </script>
 </head>
